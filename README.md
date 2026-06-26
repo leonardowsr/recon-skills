@@ -4,15 +4,7 @@
 
 > 📖 **Blog & research**: [hiago.sh](https://hiago.sh) — Pentest Playbook, field notes, and tooling.
 
-<p align="center">
-  <a href="https://star-history.com/#uphiago/recon-skills&Date">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=uphiago/recon-skills&type=Date&theme=dark" />
-      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=uphiago/recon-skills&type=Date" />
-      <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=uphiago/recon-skills&type=Date" width="400" />
-    </picture>
-  </a>
-</p>
+
 
 ---
 
@@ -117,6 +109,18 @@ Each skill directory has a `SKILL.md` with:
 - **Field-validated** — techniques confirmed on real targets before shipping.
 - **Chain everything** — one finding is Medium. Two chained is Critical.
 - **Cross-reference, don't duplicate** — hosting tables belong in one place.
+
+## ⭐ Star History
+
+<p align="center">
+  <a href="https://star-history.com/#uphiago/recon-skills&Date">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=uphiago/recon-skills&type=Date&theme=dark" />
+      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=uphiago/recon-skills&type=Date" />
+      <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=uphiago/recon-skills&type=Date" width="600" />
+    </picture>
+  </a>
+</p>
 
 ## 📄 License
 
