@@ -39,18 +39,18 @@ Login to a Proton Mail inbox via Playwright headless browser, search for specifi
 
 ```bash
 python3 proton_verify.py \
-  --email "iceandtea@proton.me" \
+  --email "user@proton.me" \
   --password "your_password" \
-  --sender "id.missao.org.br" \
+  --sender "target-domain.com" \
   --wait 15
 ```
 
 Returns:
 ```
-Found 2 emails from id.missao.org.br
-Email 1: "Missão ID — Confirme seu email"
-  🔗 https://id.missao.org.br/self-service/verification?flow=abc123...
-  🔗 https://id.missao.org.br/self-service/verification?code=xyz789...
+Found 2 emails from target-domain.com
+Email 1: "Confirm your email"
+  🔗 https://target.com/verify?token=abc123...
+  🔗 https://target.com/confirm?code=xyz789...
 ```
 
 ### Search by keyword in subject
@@ -292,22 +292,26 @@ if __name__ == "__main__":
 
 ```python
 # Example: Create account → verify email → get JWT → access API
-import asyncio, requests, re
+import asyncio, requests, re, json
+
+TARGET = "https://target.com"
+EMAIL = "user@proton.me"
+PASSWORD = "your_password"
 
 # Step 1: Create account on target
-r = requests.post("https://target.com/api/signup", json={
-    "email": "iceandtea@proton.me",
-    "password": "Test123!",
+r = requests.post(f"{TARGET}/api/signup", json={
+    "email": EMAIL,
+    "password": PASSWORD,
     "name": "Test"
 })
 print(f"Account created: {r.status_code}")
 
-# Step 2: Wait for verification email and extract link
+# Step 2: Wait for verification email and extract link via proton-verify skill
 proc = await asyncio.create_subprocess_exec(
     "python3", "proton_verify.py",
-    "--email", "iceandtea@proton.me",
-    "--password", "zg3T5k9mPceur5A",
-    "--sender", "target.com",
+    "--email", EMAIL,
+    "--password", PASSWORD,
+    "--sender", TARGET.replace("https://", ""),
     "--wait", "15",
     "--json",
     stdout=asyncio.subprocess.PIPE
@@ -322,9 +326,9 @@ if results:
     print(f"Verified: {r.status_code}")
 
 # Step 4: Login and get token
-r = requests.post("https://target.com/api/login", json={
-    "email": "iceandtea@proton.me",
-    "password": "Test123!"
+r = requests.post(f"{TARGET}/api/login", json={
+    "email": EMAIL,
+    "password": PASSWORD
 })
 token = r.json().get('token')
 print(f"JWT: {token[:50]}...")
